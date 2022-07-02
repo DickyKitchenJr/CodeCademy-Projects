@@ -1,4 +1,7 @@
 let accessToken;
+//step 82 in part 1 indicates to put the client ID, or API Key, here, but to avoid having it listed for everyone to see it is being left off for now
+const clientId = 'Client ID / API Key Goes Here';
+const redirectUri = 'http://localhost:3000/';
 
 const Spotify = {
     getAccessToken(){
@@ -18,6 +21,9 @@ const Spotify = {
             window.setTimeout(()=> accessToken = '', expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');
             return accessToken;
+        } else {
+            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+            window.location = accessUrl;
         }
 
     }
